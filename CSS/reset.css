@@ -44,3 +44,10 @@ table {
 a{
     text-decoration: none;
 }
+button{
+	background-color: transparent;
+	padding-block: 0;
+    padding-inline: 0;
+    border-width: 0;
+	border:none;
+}
