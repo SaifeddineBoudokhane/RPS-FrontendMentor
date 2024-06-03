@@ -50,20 +50,23 @@ body *{
 .score{
     height: 100%;
     align-self:stretch ;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: 20%;
     background-color: var(--color-white);
     text-align: center;
     border-radius: 7px;
-    padding: 2%;
+    padding: 1%;
 }
 .score p{
     color: var(--color-score-text);
     font-size: 1.2em;
     font-weight: 600;
 }
-p.points{
+#game-score{
     color: var(--color-dark-text);
-    font-size: 3.7em;
+    font-size: 6em;
 }
 /* PICKER */
 #choices{
@@ -106,17 +109,17 @@ p.points{
 .choice img{
     width: 50%;
 }
-.paper{
+#paper{
     top: 0;
     left: 0;
     background: var(--color-paper-gradient);
 }
-.scissors {
+#scissors {
     top: 0;
     right: 0;
     background: var(--color-scissors-gradient);
 }
-.rock {
+#rock {
     bottom: 0;
     left: calc(50% - 5vw);
     background: var(--color-rock-gradient);
@@ -136,7 +139,7 @@ p.points{
 #rules-modal{
     border: none;
     border-radius: 12px;
-    width: 20vw;
+    min-width: 20vw;
 }
 .modal-top{
     display: flex;
