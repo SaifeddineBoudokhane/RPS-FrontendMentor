@@ -8,6 +8,7 @@ box-sizing: border-box;
 :root{
     --font-barlow:"Barlow Semi Condensed", sans-serif;
     --color-white:#FFF;
+    --color-red:red;
     --color-scissors-gradient: linear-gradient(hsl(39, 89%, 49%), hsl(40, 84%, 53%));
     --color-paper-gradient: linear-gradient(hsl(230, 89%, 62%), hsl(230, 89%, 65%));
     --color-rock-gradient: linear-gradient(hsl(349, 71%, 52%), hsl(349, 70%, 56%));
@@ -20,12 +21,13 @@ box-sizing: border-box;
 
     --color-radial-gradient: radial-gradient(circle at top, hsl(214, 47%, 23%), hsl(237, 49%, 15%));
 }
+/* JavaScript */
 /* BODY */
 body{
     background:var(--color-radial-gradient);
     min-height: 100vh;
     height: fit-content;
-    padding: 3vw;
+    padding: 3vw 3vw 0 3vw;
 }
 body *{
     font-family: var(--font-barlow);
@@ -69,7 +71,7 @@ body *{
     font-size: 6em;
 }
 /* PICKER */
-#choices{
+#input-board{
     position: relative;
     width: 25vw;
     height: 20vw;
@@ -82,7 +84,7 @@ body *{
     width: 70%;
     height: 70%;
 }
-.choice{
+.choice-input{
     position: absolute;
     height: 10vw;
     width: 10vw;
@@ -92,6 +94,19 @@ body *{
     align-items: center;
     box-shadow: inset 0px -6px 0px 0px rgba(0,0,0,0.2);
 }
+#input-paper{
+    top: 0;
+    left: 0;
+}
+#input-scissors {
+    top: 0;
+    right: 0;
+}
+#input-rock {
+    bottom: 0;
+    left: calc(50% - 5vw);
+}
+
 .background-white{
     display: flex;
     justify-content: center;
@@ -106,23 +121,56 @@ body *{
     box-shadow: inset 0px 2px 0px 3px rgba(0,0,0,0.2);
     cursor: pointer;
 }
-.choice img{
+.choice-icon{
     width: 50%;
 }
-#paper{
-    top: 0;
-    left: 0;
+
+.paper{
     background: var(--color-paper-gradient);
 }
-#scissors {
-    top: 0;
-    right: 0;
+.scissors {
     background: var(--color-scissors-gradient);
 }
-#rock {
-    bottom: 0;
-    left: calc(50% - 5vw);
+.rock {
     background: var(--color-rock-gradient);
+}
+#result-display{
+    display: flex;
+    gap: 3vw;
+    margin: 2em;
+}
+.choice-output{
+    height: 20vw;
+    width: 20vw;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset 0px -6px 0px 0px rgba(0,0,0,0.2);
+}
+#result{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+#result-text{
+    font-weight: 700;
+    font-size: 3em;
+    color:  var(--color-white);
+}
+#new-round{
+    font-weight: 600;
+    font-size: 1.2em;
+    color: var(--color-score-text);
+    background-color: var(--color-white);
+    padding: 0.8em 4em;
+    border-radius: 15px;
+    cursor: pointer;
+}
+#new-round:hover{
+    color: var(--color-red);
 }
 /* RULES */
 #rules-button{
@@ -140,6 +188,9 @@ body *{
     border: none;
     border-radius: 12px;
     min-width: 20vw;
+}
+#rules-modal::backdrop{
+    background-color: rgba(0,0,0,0.5);
 }
 .modal-top{
     display: flex;

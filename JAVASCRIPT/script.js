@@ -6,16 +6,21 @@
         const buttonRules=document.getElementById("rules-button");
         const modalRules=document.getElementById("rules-modal");
         const closeRules=document.getElementById("rules-close");
-        const choiceRock=document.getElementById("rock");
-        const choicePaper=document.getElementById("paper");
-        const choiceScissors=document.getElementById("scissors");
+        const choiceRock=document.getElementById("input-rock");
+        const choicePaper=document.getElementById("input-paper");
+        const choiceScissors=document.getElementById("input-scissors");
         const scoreDisplay=document.getElementById("game-score");
-        //not used yet
-        const choicesBoard=document.getElementById("choices");
+        const computerChoiceDisplay=document.getElementById("computer-choice");
+        const computerChoiceIcon=document.getElementById("computer-choice-icon");
+        const playerChoiceDisplay=document.getElementById("player-choice");
+        const playerChoiceIcon=document.getElementById("player-choice-icon");
+        const roundDisplay=document.getElementById("result-display");
+        const inputBoard=document.getElementById("input-board");
+        const newRoundButton=document.getElementById("new-round");
+        const resultText=document.getElementById("result-text");
         //Initialize Dom
         function InitDom(){
             _AddEventListeners();
-            DisplayScore();
         }
         //Dom manipulations
         function _AddEventListeners(){
@@ -36,13 +41,45 @@
             choiceScissors.addEventListener("click",()=>{
                 game.PlayRound("scissors");
             })
+            newRoundButton.addEventListener("click",()=>{
+                _StartNewRound();
+            })
         }
-        function DisplayScore(){
+        function _DisplayScore(){
             scoreDisplay.textContent=game.GetScore();
+        }
+        function DisplayRoundResult(){
+            inputBoard.style.display="none";
+            _DisplayResultIcons();
+            _DisplayScore();
+            roundDisplay.style.display="flex";
+            switch(game.GetRoundResult()){
+                case 0:
+                    resultText.textContent="TIE";
+                    break;
+                case 1:
+                    resultText.textContent="YOU WIN";
+                    break;
+                case -1:
+                    resultText.textContent="YOU LOSE";
+                    break;
+            }
+        }
+        function _DisplayResultIcons(){
+            //player Display
+            playerChoiceDisplay.classList="choice-output " + game.GetPlayerChoice();
+            playerChoiceIcon.src = "../CSS/Images/icon-"+game.GetPlayerChoice()+".svg";
+            //computer Display
+            computerChoiceDisplay.classList="choice-output " + game.GetComputerChoice();
+            computerChoiceIcon.src = "../CSS/Images/icon-"+game.GetComputerChoice()+".svg";
+        }
+        function _StartNewRound(){
+            inputBoard.style.display="flex";
+            roundDisplay.style.display="none"
         }
         return{
             InitDom,
-            DisplayScore
+            DisplayRoundResult
         }
     })();
     
@@ -51,22 +88,27 @@
         let playerChoice=null;
         let computerChoice=null;
         let score=0;
+        let roundResult=null;
         //SETTERS
         function PlayRound(choice){
             playerChoice=choice;
             computerChoice=_GetRandomChoice();
-            score+=_GetWinner();
-            domManipulation.DisplayScore();
+            roundResult=_GetWinner(0);
+            score+=roundResult;
+            domManipulation.DisplayRoundResult();
         }
         //GETTERS
         function GetPlayerChoice(){
             return playerChoice;
         }
         function GetComputerChoice(){
-            return playerChoice;
+            return computerChoice;
         }
         function GetScore(){
             return score;
+        }
+        function GetRoundResult(){
+            return roundResult;
         }
         //GAME FUNCTION
         function ResetScore(){
@@ -94,11 +136,12 @@
                 case 3: return "scissors";
             }
         }
-        
+
         return{
             GetPlayerChoice,
             GetComputerChoice,
             GetScore,
+            GetRoundResult,
             PlayRound,
             ResetScore,
         }
