@@ -59,9 +59,11 @@
                     break;
                 case 1:
                     resultText.textContent="YOU WIN";
+                    playerChoiceDisplay.classList.add("winner-icon");
                     break;
                 case -1:
                     resultText.textContent="YOU LOSE";
+                    computerChoiceDisplay.classList.add("winner-icon");
                     break;
             }
         }

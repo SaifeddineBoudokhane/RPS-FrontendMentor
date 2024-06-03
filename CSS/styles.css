@@ -148,6 +148,12 @@ body *{
     align-items: center;
     box-shadow: inset 0px -6px 0px 0px rgba(0,0,0,0.2);
 }
+.winner-icon{
+    box-shadow: 
+                0 0 0 2.5em rgba(255, 255, 255, 0.04),
+                0 0 0 5em rgba(255, 255, 255, 0.03),
+                0 0 0 7.5em rgba(255, 255, 255, 0.02)
+}
 #result{
     display: flex;
     flex-direction: column;
@@ -177,12 +183,13 @@ body *{
     font-weight: 600;
     color: var(--color-white);
     outline: 2px solid var(--color-header-outline);
-    align-self: flex-end;
     border-radius: 5px;
     cursor: pointer;
-    margin-right: 5%;
     font-size: 1.2em;
     padding: 0.4em 1.9em;
+    position: fixed;
+    right: 9vw;
+    bottom: 4vw;
 }
 #rules-modal{
     border: none;
